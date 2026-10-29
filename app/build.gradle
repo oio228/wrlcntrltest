@@ -1,0 +1,76 @@
+plugins {
+    id 'com.android.application'
+    id 'jacoco'
+}
+
+jacoco {
+    toolVersion = '0.8.12'
+}
+
+android {
+    namespace 'com.example.wordcounter'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.example.wordcounter'
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+
+        // Runner for UI (instrumented) tests in src/androidTest
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    buildTypes {
+        debug {
+            // Generates coverage reports:
+            //   createDebugUnitTestCoverageReport        (unit tests)
+            //   createDebugAndroidTestCoverageReport     (UI tests on device/emulator)
+            enableUnitTestCoverage true
+            enableAndroidTestCoverage true
+        }
+    }
+
+    testCoverage {
+        jacocoVersion = '0.8.12'
+    }
+
+    testOptions {
+        unitTests {
+            // Robolectric needs merged resources, layouts and the manifest
+            includeAndroidResources = true
+        }
+        animationsDisabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+// Robolectric loads app classes through its own class loader, so JaCoCo
+// must also record classes without a code source location.
+tasks.withType(Test).configureEach {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+
+    // ---------- Unit tests (src/test, run on the JVM) ----------
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.13'
+    testImplementation 'androidx.test:core:1.6.1'
+    testImplementation 'androidx.test.ext:junit:1.2.1'
+
+    // ---------- UI tests (src/androidTest, run on device/emulator) ----------
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestImplementation 'androidx.test:rules:1.6.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.3.0'
+}

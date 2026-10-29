@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Word Counter</string>
+
+    <string name="label_input_text">Enter your text:</string>
+    <string name="hint_input_text">Type or paste text here…</string>
+    <string name="label_metric">What to count:</string>
+    <string name="button_count">Count</string>
+
+    <string name="result_format">%1$s: %2$d</string>
+    <string name="toast_empty_text">Please enter some text first</string>
+
+    <!-- Order must match the TextMetric enum -->
+    <string-array name="metric_options">
+        <item>Sentences</item>
+        <item>Words</item>
+        <item>Chars</item>
+        <item>Numbers</item>
+    </string-array>
+</resources>
