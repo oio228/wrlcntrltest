@@ -1,4 +1,4 @@
-# WordCounter — Lab #3: Android App Testing
+# WordCounter — Lab 3 Android App Testing
 
 The app counts sentences, words, characters and numbers in a text.
 This project adds **unit tests** (JVM, JUnit 4 + Robolectric), **UI tests** (Espresso + UiAutomator)
